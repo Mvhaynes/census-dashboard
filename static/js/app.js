@@ -181,6 +181,7 @@ d3.csv("data/data.csv").then(function (data) {
     d.income = +d.income;
     d.poverty = +d.poverty;
     d.healthcare = +d.healthcare;
+    d.smokes = +d.smokes;
   });
 
   // Scale data
@@ -358,6 +359,9 @@ d3.csv("data/data.csv").then(function (data) {
           obesityLabel
             .classed("active", false)
             .classed("inactive", true);
+          smokerLabel
+            .classed("active", false)
+            .classed("inactive", true);
         }
 
         if (chosenYAxis === 'obesity') {
@@ -365,6 +369,21 @@ d3.csv("data/data.csv").then(function (data) {
             .classed("active", false)
             .classed("inactive", true);
           obesityLabel
+            .classed("active", true)
+            .classed("inactive", false);
+          smokerLabel
+            .classed("active", false)
+            .classed("inactive", true);
+        }
+
+        if (chosenYAxis === 'smokes') {
+          healthcareLabel
+            .classed("active", false)
+            .classed("inactive", true);
+          obesityLabel
+            .classed("active", false)
+            .classed("inactive", true);
+            smokerLabel
             .classed("active", true)
             .classed("inactive", false);
         }
