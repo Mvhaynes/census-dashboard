@@ -157,7 +157,8 @@ d3.csv("data/data.csv").then(function (data) {
   // Groups for axis labels 
   var labelsGroup = chartGroup.append("g")
     .attr("transform", `translate(${width / 2}, ${height + 20})`);
-
+  
+  var yLabels = chartGroup.append("g");
   // Axis labels 
   var povertyLabel = labelsGroup.append("text")
     .attr("x", 0)
@@ -180,7 +181,7 @@ d3.csv("data/data.csv").then(function (data) {
     .classed("inactive", true)
     .text("Median Income");
 
-  chartGroup.append("text")
+  var healthcareLabel = yLabels.append("text")
     .attr("transform", "rotate(-90)")
     .attr("y", 0 - (margin.left - 25))
     .attr("x", 0 - (height / 2))
@@ -189,14 +190,14 @@ d3.csv("data/data.csv").then(function (data) {
     .classed("active", true)
     .text("Lacking Healthcare (%)");
 
-  // var obesityLabel = yLabelsGroup.append("text")
-  //   .attr("transform", "rotate(-90)")
-  //   .attr("y", 0 - (margin.left))
-  //   .attr("x", 0 - (height / 2))
-  //   .attr("dy", "1em")
-  //   .attr("value", "obesity")
-  //   .classed("inactive", true)
-  //   .text("Obesity (%)");
+  var obesityLabel = yLabels.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0 - (margin.left))
+    .attr("x", 0 - (height / 2))
+    .attr("dy", "1em")
+    .attr("value", "obesity")
+    .classed("inactive", true)
+    .text("Obesity (%)");
 
   // updateToolTip function
   var circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
