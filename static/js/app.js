@@ -135,17 +135,17 @@ function updateToolTip(chosenXAxis, circlesGroup) {
       });
     }
 
-circlesGroup.call(toolTip);
+  circlesGroup.call(toolTip);
 
-circlesGroup.on("mouseover", function (data) {
-  toolTip.show(data);
-})
-  .on("mouseout", function (data) {
-    toolTip.hide(data);
-  });
+  circlesGroup.on("mouseover", function (data) {
+    toolTip.show(data);
+  })
+    .on("mouseout", function (data) {
+      toolTip.hide(data);
+    });
 
-return circlesGroup;
-}
+  return circlesGroup;
+  }
 
 function yToolTip(chosenYAxis, circlesGroup) {
 
@@ -171,7 +171,6 @@ function yToolTip(chosenYAxis, circlesGroup) {
 
   return circlesGroup;
 }
-
 
 // Retrieve data from the CSV file and execute everything below
 d3.csv("data/data.csv").then(function (data) {
@@ -392,34 +391,3 @@ d3.csv("data/data.csv").then(function (data) {
 }).catch(function (error) {
   console.log(error);
 });
-
-
-  // yLabelsGroup.selectAll("text").on("click", function () {
-
-  //   var value = d3.select(this).attr("value");
-  //   if (value !== chosenYAxis) {
-  //     chosenYAxis = value;
-
-  //     yLinearScale = yScale(data, chosenYAxis);
-  //     yAxis = renderYAxes(xLinearScale, yAxis);
-  //     circlesGroup = renderYCircles(circlesGroup, yLinearScale, chosenYAxis);
-  //     circlesGroup = yToolTip(chosenYAxis, circlesGroup);
-
-  //     if (chosenYAxis === 'healthcare') {
-  //       healthcareLabel
-  //         .classed("active", true)
-  //         .classed("inactive", false)
-  //       obesityLabel
-  //         .classed("active", false)
-  //         .classed("inactive", true)
-  //     }
-  //     if (chosenYAxis === 'obesity') {
-  //       healthcareLabel
-  //         .classed("active", false)
-  //         .classed("inactive", true)
-  //       obesityLabel
-  //         .classed("active", true)
-  //         .classed("inactive", false)
-  //     }
-  //   }
-  // });
