@@ -12,6 +12,8 @@ html {
 body {
   /* Padding bottom by footer height */
   padding-bottom: 80px;
+  font-family: 'Raleway', sans-serif;
+  background-color: rgba(255, 255, 255, 0.986);
 }
 
 #footer {
@@ -28,4 +30,13 @@ body {
 #footer p {
   margin: 0;
   font-size: 16px;
+}
+
+#title {
+  text-align: center;
+}
+
+.container {
+  background-color: rgb(255, 255, 255);
+  justify-content: center;
 }

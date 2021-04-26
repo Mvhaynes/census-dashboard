@@ -4,7 +4,7 @@ var svgHeight = 500;
 
 var margin = {
   top: 50,
-  right: 50,
+  right: 80,
   bottom: 80,
   left: 80
 };
@@ -18,7 +18,7 @@ var svg = d3
   .classed("chart", true)
   .append("svg")
   .attr("width", svgWidth)
-  .attr("height", svgHeight);
+  .attr("height", svgHeight)
 
 // Append an SVG group
 var chartGroup = svg.append("g")
@@ -133,7 +133,7 @@ function updateToolTip(chosenXAxis, circlesGroup) {
           ${chosenXAxis}: $${data[chosenXAxis]}<br> 
           ${chosenYAxis}: ${data[chosenYAxis]}%`)
       });
-    }
+  }
 
   circlesGroup.call(toolTip);
 
@@ -145,7 +145,7 @@ function updateToolTip(chosenXAxis, circlesGroup) {
     });
 
   return circlesGroup;
-  }
+}
 
 function yToolTip(chosenYAxis, circlesGroup) {
 
@@ -266,7 +266,7 @@ d3.csv("data/data.csv").then(function (data) {
     .attr("value", "obesity")
     .classed("inactive", true)
     .text("Obesity (%)");
-  
+
   var smokerLabel = yLabels.append("text")
     .attr("transform", "rotate(-90)")
     .attr("y", 0 - (margin.left + 5))
@@ -382,7 +382,7 @@ d3.csv("data/data.csv").then(function (data) {
           obesityLabel
             .classed("active", false)
             .classed("inactive", true);
-            smokerLabel
+          smokerLabel
             .classed("active", true)
             .classed("inactive", false);
         }
