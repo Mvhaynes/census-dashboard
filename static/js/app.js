@@ -1,3 +1,4 @@
+// Set chart container 
 var svgWidth = 900;
 var svgHeight = 500;
 
@@ -11,7 +12,7 @@ var margin = {
 var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
-// Create an SVG wrapper, append an SVG group that will hold our chart,
+// SVG wrapper to hold the chart 
 var svg = d3
   .select("#scatter")
   .classed("chart", true)
@@ -27,7 +28,7 @@ var chartGroup = svg.append("g")
 var chosenXAxis = "poverty";
 var chosenYAxis = "healthcare";
 
-// function used for updating x-scale var upon click on axis label
+// functions for scaling data 
 function xScale(data, chosenXAxis) {
 
   var xLinearScale = d3.scaleLinear()
@@ -65,6 +66,15 @@ function renderCircles(circlesGroup, newXScale, chosenXAxis) {
   circlesGroup.transition()
     .duration(1000)
     .attr("cx", d => newXScale(d[chosenXAxis]));
+
+  return circlesGroup;
+}
+
+function moveLabels(circleText, newXScale, chosenXAxis) {
+
+  circlesText.transition()
+    .duration(1000)
+    .attr("dx", d => newXScale(d[chosenXAxis]))
 
   return circlesGroup;
 }
@@ -120,18 +130,29 @@ d3.csv("data/data.csv").then(function (data) {
     .call(bottomAxis);
 
   chartGroup.append("g")
+    .classed("y-axis", true)
     .call(leftAxis);
 
   // Add default circles 
   var circlesGroup = chartGroup.selectAll("circle")
     .data(data)
     .enter()
+    .append("g")
+    .attr("id", "circles")
     .append("circle")
     .classed("stateCircle", true)
     .attr("cx", d => xLinearScale(d[chosenXAxis]))
     .attr("cy", d => yLinearScale(d[chosenYAxis]))
     .attr("r", 15)
     .attr("opacity", ".5");
+
+  // Add state abbreviations to circles 
+  var circleText = chartGroup.selectAll("#circles")
+  .append("text")
+  .text(d => d.abbr)
+  .classed("stateText",true)
+  .attr("dx", d => xLinearScale(d[chosenXAxis]))
+  .attr("dy", d => yLinearScale(d[chosenYAxis] - 0.3));
 
   // Groups for axis labels 
   var labelsGroup = chartGroup.append("g")
