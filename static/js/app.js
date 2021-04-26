@@ -60,7 +60,7 @@ function renderAxes(newXScale, xAxis) {
   return xAxis;
 }
 
-// function used for updating circles group with a transition to
+// Function to update circles 
 function renderCircles(circlesGroup, newXScale, chosenXAxis) {
 
   circlesGroup.transition()
@@ -69,14 +69,14 @@ function renderCircles(circlesGroup, newXScale, chosenXAxis) {
 
   return circlesGroup;
 }
-
+// Function to move circle labels
 function moveLabels(circleText, newXScale, chosenXAxis) {
 
-  circlesText.transition()
+  circleText.transition()
     .duration(1000)
     .attr("dx", d => newXScale(d[chosenXAxis]))
 
-  return circlesGroup;
+  return circleText;
 }
 
 // function used for updating circles group with new tooltip
@@ -148,12 +148,12 @@ d3.csv("data/data.csv").then(function (data) {
 
   // Add state abbreviations to circles 
   var circleText = chartGroup.selectAll("#circles")
-  .append("text")
-  .text(d => d.abbr)
-  .classed("stateText",true)
-  .attr("dx", d => xLinearScale(d[chosenXAxis]))
-  .attr("dy", d => yLinearScale(d[chosenYAxis] - 0.3));
-
+    .append("text")
+    .text(d => d.abbr)
+    .classed("stateText",true)
+    .attr("dx", d => xLinearScale(d[chosenXAxis]))
+    .attr("dy", d => yLinearScale(d[chosenYAxis] - 0.3));
+  
   // Groups for axis labels 
   var labelsGroup = chartGroup.append("g")
     .attr("transform", `translate(${width / 2}, ${height + 20})`);
@@ -214,6 +214,7 @@ d3.csv("data/data.csv").then(function (data) {
         xLinearScale = xScale(data, chosenXAxis);
         xAxis = renderAxes(xLinearScale, xAxis);
         circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis);
+        circleText = moveLabels(circleText, xLinearScale, chosenXAxis);
         circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
 
         // Updates labels to bold
